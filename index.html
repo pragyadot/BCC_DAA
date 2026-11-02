@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BCC Lab — Learn Graph Algorithms by Watching Them Work</title>
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="redesign.css">
+<link rel="prefetch" href="dfs.html"><link rel="prefetch" href="bfs.html"><link rel="prefetch" href="bcc.html"></head>
+<body class="home-page">
+<header class="site-header"><a class="brand" href="index.html"><span class="brand-mark">G</span><span><b>BCC LAB</b><small>GRAPH ALGORITHMS, MADE VISIBLE</small></span></a><nav><a href="#how-it-works">How it works</a><a href="#builderSection" id="navBuild">Graph builder</a><button id="guide" class="guide-button">How to use</button></nav></header>
+<main class="home-main">
+<section id="welcome" class="welcome redesign-welcome">
+  <div class="hero-copy"><div class="welcome-kicker"><span class="kicker-line"></span> AN INTERACTIVE GRAPH ALGORITHM LAB</div>
+    <h1>Don't just read the algorithm.<br><em>Watch the graph think.</em></h1>
+    <p class="welcome-lead">Build a graph, run the algorithm one step at a time, and see exactly how traversal, discovery times, low values and articulation points connect to Biconnected Components.</p>
+    <div class="hero-actions"><button id="startLearning" class="welcome-primary">Start with a graph <span>→</span></button><button id="welcomeGuide" class="welcome-secondary">See the learning path</button></div>
+    
+  </div>
+  <div class="hero-visual" aria-label="Illustration of connected graph vertices"><div class="visual-label">THE IDEA IN ONE PICTURE</div><svg viewBox="0 0 520 340" role="img" aria-label="Two triangles connected at an articulation point"><g class="hero-edges"><path d="M92 166 L196 72 L196 260 Z M196 260 L337 72 L440 166 Z"/><path d="M92 166 L196 260 L196 72"/><path d="M196 260 L337 72 L440 166"/></g><g class="hero-nodes"><circle cx="92" cy="166" r="25"/><circle cx="196" cy="72" r="25"/><circle cx="196" cy="260" r="28" class="articulation-node"/><circle cx="337" cy="72" r="25"/><circle cx="440" cy="166" r="25"/></g><g class="hero-letters"><text x="92" y="173">A</text><text x="196" y="79">B</text><text x="196" y="267">C</text><text x="337" y="79">D</text><text x="440" y="173">E</text></g><path class="callout-line" d="M220 277 L274 309 L352 309"/><text class="callout-text" x="360" y="314">articulation point</text></svg><div class="visual-caption"><b>One graph. Many connected ideas.</b><span>DFS → low values → separation → components</span></div></div>
+  <div class="learning-strip" id="how-it-works"><div><span>01</span><b>Build</b><small>Create or load a graph</small></div><i>→</i><div><span>02</span><b>Explore</b><small>Step through DFS or BFS</small></div><i>→</i><div><span>03</span><b>Understand</b><small>See why BCCs split</small></div></div>
+  <section class="disc-low-entry" aria-label="Learn discovery and low values first">
+    <div><span class="section-overline">NEW TO BCC?</span><h2>First understand the numbers.</h2><p>Before running DFS or BCC, learn what discovery time and low value actually tell you—and why they reveal bridges and articulation points.</p></div>
+    <a href="bcc.html#learn-disc-low" class="disc-low-link">Learn disc &amp; low values <span>→</span></a>
+  </section>
+  <div class="route-row"><div><b>Choose where to begin</b><span>All three modes use the graph you build next.</span></div><button data-welcome-route="dfs">DFS traversal</button><button data-welcome-route="bfs">BFS traversal</button><button data-welcome-route="bcc" class="route-bcc">BCC explorer</button></div>
+</section>
+
+<section id="builderSection" class="builder-hidden redesign-builder">
+  <div class="builder-heading"><div><div class="section-overline">YOUR WORKSPACE <span> / STEP 01</span></div><h1>Build your graph</h1><p>Add vertices, connect edges, or start from a worked example. Then choose an exploration mode.</p></div><button class="back-to-intro" id="backToIntro">← Back to overview</button></div>
+  <section class="workspace redesign-workspace">
+    <div class="card graph-card"><div class="toolbar"><div class="canvas-instructions"><span class="instruction-dot"></span><span id="hint">Click empty space to add a vertex. Click two vertices to connect them. Drag to arrange.</span></div><div class="toolbar-actions"><button id="undo" disabled>↶ Undo</button><button id="clear">Clear graph</button></div></div><div id="canvas"><div id="empty"><strong>＋</strong><b>Your graph starts here</b><span>Click anywhere on the grid to add vertex A</span></div></div><div class="canvas-footer"><span><i class="legend-node"></i> Vertex</span><span><i class="legend-edge"></i> Edge</span><span>Double-click a vertex or edge to remove it</span></div></div>
+    <aside class="card side builder-controls"><div class="side-section"><div class="side-eyebrow">LIVE GRAPH</div><h2>Graph summary</h2><div class="stats"><div><span>Vertices</span><strong id="vc">0</strong></div><div><span>Edges</span><strong id="ec">0</strong></div></div><div id="valid" class="notice">Add at least two vertices and one edge.</div></div>
+      <div class="side-section"><div class="side-eyebrow">START QUICKLY</div><h2>Load an example</h2><div class="examples"><button data-ex="triangle"><b>Triangle</b><small>One cycle</small></button><button data-ex="chain"><b>Chain</b><small>Bridge edges</small></button><button data-ex="bcc"><b>Joined cycles</b><small>Articulation point</small></button><button data-ex="multi"><b>Multiple BCCs</b><small>Several components</small></button></div></div>
+      <div class="side-section explore-section"><div class="side-eyebrow">RUN AN ALGORITHM</div><h2>Explore this graph</h2><div class="actions"><button id="dfs" class="primary" disabled><span>01</span> Explore with DFS <b>→</b></button><button id="bfs" disabled><span>02</span> Explore with BFS <b>→</b></button><button id="bcc" disabled><span>03</span> Explore BCCs <b>→</b></button></div><a class="compare-link" href="bcc-bfs-comparison.html">Why standard BCC uses DFS — compare approaches →</a></div>
+    </aside>
+  </section>
+  <div class="builder-note"><b>Tip</b><span>For the clearest BCC demonstration, load <strong>Joined cycles</strong>. It creates two cycles sharing one articulation vertex.</span></div>
+</section>
+</main>
+<div id="modal" class="modal hidden"><div class="modalbox"><button id="close">×</button><small>GRAPH BUILDER GUIDE</small><h2>How to build a graph</h2><ol><li>Click empty space to add a vertex.</li><li>Click one vertex, then another to connect them.</li><li>Drag vertices to arrange them.</li><li>Double-click a vertex to delete it.</li><li>Double-click an edge to delete it.</li></ol><p>BCC Lab uses simple undirected graphs.</p></div></div>
+<div id="roadmap" class="modal hidden"><div class="modalbox"><button id="closeRoadmap">×</button><small>YOUR LEARNING PATH</small><h2>From traversal to BCC</h2><ol><li>Build a graph or load the joined-cycles example.</li><li>Watch DFS discover vertices and backtrack.</li><li>Track discovery times and how back edges change low values.</li><li>See bridges and articulation points appear.</li><li>Watch the edge stack reveal each BCC.</li><li>Use the Practice Lab to solve one yourself.</li></ol><button id="roadmapStart" class="welcome-primary">Build a graph →</button></div></div>
+<script src="app.js"></script><script>
+// Page-level navigation: reveal the builder and move the viewport to it, without locking document scroll.
+(function(){const builder=document.getElementById('builderSection'),welcome=document.getElementById('welcome');function showBuilder(){builder.classList.remove('builder-hidden');builder.classList.add('builder-visible');setTimeout(()=>builder.scrollIntoView({behavior:'smooth',block:'start'}),40)}document.getElementById('startLearning')?.addEventListener('click',showBuilder);document.getElementById('navBuild')?.addEventListener('click',e=>{e.preventDefault();showBuilder()});document.getElementById('backToIntro')?.addEventListener('click',()=>{builder.classList.add('builder-hidden');builder.classList.remove('builder-visible');welcome.scrollIntoView({behavior:'smooth',block:'start'})});document.querySelectorAll('[data-welcome-route]').forEach(btn=>btn.addEventListener('click',()=>{localStorage.setItem('bccPreferredRoute',btn.dataset.welcomeRoute);showBuilder()}));document.getElementById('roadmapStart')?.addEventListener('click',()=>{document.getElementById('roadmap')?.classList.add('hidden');showBuilder()})})();
+</script>
+</body></html>

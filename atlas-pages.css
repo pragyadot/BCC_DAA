@@ -1,0 +1,22 @@
+:root{--atlas-paper:#f4f1e8;--atlas-surface:#fffdf7;--atlas-ink:#202820;--atlas-muted:#647064;--atlas-line:#d8d2c3;--atlas-green:#244d3d;--atlas-rust:#c44e32;--atlas-gold:#d29a43}
+html,body{height:auto!important;min-height:100%;overflow-x:hidden!important;overflow-y:auto!important;background:var(--atlas-paper)!important;color:var(--atlas-ink)!important;font-family:'Segoe UI',Arial,sans-serif!important}
+header{background:var(--atlas-surface)!important;border-color:var(--atlas-line)!important;box-shadow:0 3px 12px rgba(34,45,34,.04)}
+h1,h2,h3{font-family:Georgia,'Times New Roman',serif!important;color:#26362b!important}button{border-radius:3px!important}a{color:#9d4933}
+.card,.visual-card,.right>section,.explanation,.stack-card,.order-card,.cx-header,.cx-main>.card,.compare-card,.compare-hero{background:var(--atlas-surface)!important;border-color:var(--atlas-line)!important;border-radius:3px!important;box-shadow:0 5px 16px rgba(34,45,34,.05)!important}
+#canvas,.cx-graph,.compare-canvas,.dfs-mini-graph{background-color:#fbfaf4!important;background-image:radial-gradient(#c9c5b5 1px,transparent 1px)!important;background-size:22px 22px!important}
+.vertex,.cx-node,.cmp-node{border-color:var(--atlas-green)!important;color:var(--atlas-green)!important}.vertex.current,.vertex.selected,.cx-node.current,.cmp-node.active{background:var(--atlas-rust)!important;border-color:var(--atlas-rust)!important;color:#fff!important}.vertex.visited,.stack-item,.order-item{background:#e3ece1!important;border-color:#b9cbb8!important;color:#244d3d!important}.edge.active,.edge.tree,.cx-edge.active{background:var(--atlas-rust)!important;stroke:var(--atlas-rust)!important}
+button.primary,.primary,.controls .primary,.practice-primary{background:var(--atlas-rust)!important;border-color:var(--atlas-rust)!important;color:#fff!important}.stack,.queue{border-color:#b9cbb8!important;background:#f4f7f0!important}.algo-box,.code-panel{background:#252d28!important;color:#f8f3e8!important;border-radius:3px!important}
+.dfs-learning-sidebar,.learning-sidebar{background:#e9e7d9!important;border-color:var(--atlas-line)!important;box-shadow:5px 0 20px rgba(34,45,34,.1)!important}.dfs-learning-menu button.active,.learning-menu button.active{background:#d7e1d4!important;color:var(--atlas-green)!important}
+@media(max-width:760px){main,.cx-main{width:auto!important;padding-left:14px!important;padding-right:14px!important}.layout,.cx-layout{grid-template-columns:1fr!important}}
+
+/* v47 — clearer notation and lesson hierarchy */
+.notation-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0}
+.notation-grid>div{padding:14px;border:1px solid rgba(55,75,62,.22);background:rgba(255,255,255,.42);border-radius:5px}
+.notation-grid>div>b{display:block;margin-bottom:6px;color:#294b3c}
+.notation-grid>div>p{margin:0;font-size:.94rem;line-height:1.5}
+.theory-running-example .example-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.theory-running-example .example-step{padding:14px;border-left:3px solid #b56b43;background:rgba(255,255,255,.4)}
+.theory-running-example .example-step p{line-height:1.55;overflow-wrap:anywhere}
+.theory-grid pre{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6;padding:18px;background:#25372f;color:#f7f0e4;border-radius:5px;overflow-x:auto}
+@media(max-width:900px){.notation-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.theory-running-example .example-steps{grid-template-columns:1fr}}
+@media(max-width:520px){.notation-grid{grid-template-columns:1fr}}

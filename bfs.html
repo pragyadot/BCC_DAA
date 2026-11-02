@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BCC Lab — BFS Explorer</title>
+<link rel="stylesheet" href="dfs.css">
+<link rel="stylesheet" href="atlas-pages.css"><link rel="stylesheet" href="workspace-redesign.css">
+<link rel="prefetch" href="bcc.html"><link rel="prefetch" href="bfs.html"><link rel="prefetch" href="dfs.html"></head>
+<body class="bfs-page">
+<header>
+  <div>
+    <b> BCC Lab</b>
+    <small>BFS traversal · Queue-based exploration (not a replacement for DFS-based BCC detection)</small>
+  </div>
+  <nav class="header-actions"><a class="secondary-btn nav-link" href="bcc.html#learn-disc-low">Learn disc &amp; low</a><button class="secondary-btn" onclick="location.href='complexity.html'">Complexity Lab</button><button id="dfsFromBfs" class="secondary-btn"> DFS on same graph</button><button id="compareBfsBcc" class="secondary-btn"> BFS and BCC detection</button><button id="bccFromDfs" class="secondary-btn"> Explore BCCs (DFS)</button><button id="back">← Graph Builder</button></nav>
+</header>
+
+<main>
+  <section class="intro">
+    <div>
+      <small>STEP 2 · BFS EXPLORER</small>
+      <h1>BFS traversal</h1>
+      <p id="status" class="visually-hidden" aria-live="polite">Select Next to process the queue one step at a time.</p>
+    </div>
+    <div class="mode">
+      <button id="algo"> Step Algorithm</button><button id="completeAlgo"> Complete Algorithm</button>
+    </div>
+  </section>
+
+  <section class="layout">
+    <div class="card visual-card">
+      <div class="toolbar">
+        <label class="start-picker">Start vertex <select id="startVertex" aria-label="Choose starting vertex"></select></label>
+        <span id="stepLabel">Step 0 of 0</span>
+        <div class="speed">
+          <label>Speed</label>
+          <span>Faster</span>
+          <input id="speed" type="range" min="1000" max="5000" step="100" value="2500" aria-label="Animation speed">
+          <span>Slower</span>
+          <strong id="speedValue">2.50s/step</strong>
+        </div>
+      </div>
+      
+      <div class="controls">
+        <button id="first">⏮ First</button>
+        <button id="prev">← Previous</button>
+        <button id="play" class="primary">▶ Play</button>
+        <button id="next">Next →</button>
+        <button id="last">Last ⏭</button>
+      </div>
+      <div id="canvas"></div>
+    </div>
+
+    <aside class="right">
+      <div class="card explanation">
+        <small id="phase">READY</small>
+        <h2 id="title">Ready</h2>
+        <p id="description">Choose a starting vertex, then follow the queue as BFS explores level by level.</p>
+        <div id="algoBox" class="algo-box hidden"></div><div id="fullAlgoBox" class="content-box hidden"></div><div id="variablesBox" class="content-box hidden"></div><div id="whatDfsBox" class="content-box hidden"></div><div id="completeAlgoBox" class="content-box hidden"></div>
+      </div>
+
+      <div class="card stack-card">
+        <div class="stack-head">
+          <h2>BFS queue</h2>
+          <span id="stackCount">0 items</span>
+        </div>
+        <div id="stackPointer" class="stack-pointer" aria-live="polite">TOP</div><div id="stack" class="stack-empty">Empty</div>
+      </div>
+      <div class="card order-card">
+        <h2>Currently traversed · BFS order</h2>
+        <div id="order" class="order-empty">No vertices visited</div>
+      </div>
+      <div class="card explanation bcc-warning-card">
+        <small>METHOD COMPARISON</small>
+        <h2>BFS traversal is not BCC detection</h2>
+        <p>BFS explores level by level. Standard BCC detection relies on DFS discovery/low-link relationships and an edge stack.</p>
+        <p><a href="bcc-bfs-comparison.html">Test the BFS-assisted connectivity method on this graph →</a></p>
+      </div>
+    </aside>
+  </section>
+
+  <section class="timeline card">
+    <div>
+      <small>STEP TIMELINE</small>
+      <h2>Current step</h2>
+    </div>
+    <div id="timeline"></div>
+  </section>
+</main>
+
+<script src="bfs.js"></script>
+</body>
+</html>

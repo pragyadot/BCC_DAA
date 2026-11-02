@@ -1,0 +1,76 @@
+/* v42: browser-first workspace, not a fixed-height dashboard */
+:root{--work-ink:#202b27;--work-muted:#586a63;--work-line:#d7cdbb;--work-paper:#f7f2e8;--work-card:#fffdf8;--work-accent:#d65336;--work-green:#176b58}
+html,body{min-height:100%;height:auto!important;overflow-x:hidden!important;overflow-y:auto!important}
+body{padding-left:0!important;margin:0!important;background:var(--work-paper)!important;color:var(--work-ink)!important}
+.dfs-learning-sidebar,.learning-sidebar{display:none!important}
+header{position:relative!important;top:auto!important;width:100%!important;min-height:66px!important;padding:12px clamp(16px,2vw,30px)!important;display:flex!important;align-items:center!important;gap:18px!important;flex-wrap:wrap!important}
+header>div{flex:0 0 auto!important;min-width:170px!important}.header-actions{flex:1 1 auto!important;justify-content:flex-end!important}
+main{width:100%!important;max-width:none!important;margin:0!important;padding:18px clamp(14px,2vw,30px) 32px!important}
+.intro{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:16px!important;margin:0 0 14px!important;padding:0 2px!important}
+.intro h1{font-size:clamp(28px,2.4vw,38px)!important;margin:2px 0 3px!important}.intro p{margin:0!important;max-width:850px!important}
+.layout{display:grid!important;grid-template-columns:minmax(0,1.65fr) minmax(290px,.75fr)!important;gap:14px!important;align-items:start!important}
+.visual-card{min-width:0!important;display:flex!important;flex-direction:column!important;overflow:visible!important}
+.toolbar{height:auto!important;min-height:54px!important;display:flex!important;flex-wrap:wrap!important;justify-content:space-between!important;gap:10px!important;padding:9px 12px!important}
+.visual-card>.controls{order:0!important;display:flex!important;align-items:center!important;gap:7px!important;flex-wrap:wrap!important;padding:9px 12px!important;border-bottom:1px solid var(--work-line)!important;background:#f1eadc!important}
+.visual-card>#canvas{order:1!important;height:clamp(420px,57vh,680px)!important;min-height:420px!important;width:100%!important;background-color:#fbfaf4!important;background-image:radial-gradient(#c9c5b5 1px,transparent 1px)!important;background-size:18px 18px!important}
+.right{display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important;align-content:start!important;min-width:0!important}
+.right>.card{min-width:0!important;margin:0!important;padding:14px!important}.right>.explanation{grid-column:1/-1!important}.right>.order-card{grid-column:1/-1!important}
+.right h2{font-size:21px!important;margin:0 0 8px!important}.right p{margin:6px 0!important}
+.timeline.card{margin-top:14px!important;padding:12px!important;display:grid!important;grid-template-columns:125px minmax(0,1fr)!important;gap:12px!important;align-items:center!important}
+.timeline-track{flex-wrap:wrap!important;overflow:hidden!important}
+.controls button{padding:9px 12px!important}.controls #play{min-width:104px!important}
+/* visual response when an algorithm step changes */
+.focus-stack .stack-card,.focus-queue .stack-card,.focus-order .order-card,.focus-graph .visual-card,.focus-algorithm .explanation{outline:3px solid #d65336!important;outline-offset:2px!important;box-shadow:0 0 0 6px #d6533620!important;transition:box-shadow .18s,outline .18s}
+.focus-stack .stack-item.top,.focus-queue .stack-item.top,.focus-order .order-item.current{animation:stepPulse .7s ease-in-out 2}
+@keyframes stepPulse{50%{transform:scale(1.045);filter:brightness(1.05)}}
+@media(max-width:1050px){.layout{grid-template-columns:1fr!important}.right{grid-template-columns:repeat(2,minmax(0,1fr))}.right>.explanation,.right>.order-card{grid-column:1/-1!important}}
+@media(max-width:650px){main{padding:12px!important}.intro{display:block!important}.right{grid-template-columns:1fr}.right>.card{grid-column:1!important}.visual-card>#canvas{height:440px!important;min-height:380px!important}.timeline.card{display:block!important}.timeline.card>div:first-child{margin-bottom:8px}}
+/* Complexity: make the graph and explanation occupy the same working row, without long dead vertical gaps. */
+.cx-header{max-width:none!important;padding:12px clamp(16px,2vw,30px)!important;align-items:center!important}.cx-header h1{font-size:clamp(28px,2.4vw,38px)!important}.cx-main{max-width:none!important;padding:14px clamp(14px,2vw,30px) 28px!important;gap:12px!important}.cx-controls{padding:12px!important}.cx-layout{grid-template-columns:minmax(0,1.3fr) minmax(330px,.9fr)!important;gap:12px!important;align-items:start!important}.cx-graph{height:clamp(380px,53vh,610px)!important}.analysis-card{padding:14px!important}.derive-box{margin-top:12px!important;padding:12px!important}.formula{margin:12px 0 5px!important}.counter-row{margin:12px 0!important}.trace-list-card{padding:12px!important}
+@media(max-width:900px){.cx-layout{grid-template-columns:1fr!important}.cx-graph{height:420px!important}}
+
+.bcc-page{margin:0!important;width:100%!important;max-width:none!important;padding:14px clamp(14px,2vw,30px) 30px!important}
+.bcc-topbar{display:flex!important;align-items:center!important;gap:14px!important;flex-wrap:wrap!important;padding:0 0 10px!important}
+.bcc-heading{margin-right:auto!important}.bcc-page-nav{flex:0 1 auto!important}
+.app-tabs{margin:0 0 12px!important}.controls-card{margin:0 0 12px!important;padding:10px 12px!important}.controls-row{align-items:center!important}.controls-row .speed{margin-left:auto!important}
+.bcc-workspace{grid-template-columns:minmax(0,1.55fr) minmax(300px,.85fr)!important;gap:12px!important;align-items:start!important}
+.bcc-canvas{height:clamp(420px,55vh,640px)!important;min-height:420px!important;background-color:#fbfaf4!important;background-image:radial-gradient(#c9c5b5 1px,transparent 1px)!important;background-size:18px 18px!important}
+.bcc-side{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-content:start!important;gap:10px!important}.bcc-side>.explanation-card,.bcc-side>.algorithm-card{grid-column:1/-1!important}
+.focus-stack .state-card:has(#edgeStack),.focus-graph .bcc-canvas-card,.focus-algorithm .algorithm-card{outline:3px solid #d65336!important;outline-offset:2px!important;box-shadow:0 0 0 6px #d6533620!important}
+.dfs-code-line.active,.algo-line.active{background:#f9dfd4!important;color:#7d2e1c!important;border-left:4px solid #d65336!important;font-weight:900!important}
+#practiceGraphSet{padding:8px 10px;border:1px solid var(--work-line);background:#fffdf8;border-radius:4px;font:inherit}
+@media(max-width:1050px){.bcc-workspace{grid-template-columns:1fr!important}.bcc-side{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:760px){.bcc-side{display:flex!important}.bcc-canvas{height:440px!important;min-height:380px!important}.bcc-page{padding:12px!important}}
+
+/* v43: keep the actual working controls in the first screenful and use the side column for live state. */
+.visual-card>.toolbar{order:0!important}.visual-card>.controls{order:1!important}.visual-card>#canvas{order:2!important;height:clamp(390px,49vh,590px)!important;min-height:390px!important}
+.layout{grid-template-columns:minmax(0,1.5fr) minmax(330px,.9fr)!important;gap:12px!important}
+.right{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+.right>.explanation{grid-column:1/-1!important}.right>.order-card{grid-column:1/-1!important}
+.right>.stack-card,.right>.order-card,.right>.explanation{padding:11px 13px!important}
+.right>.explanation h2,.right>.stack-card h2,.right>.order-card h2{font-size:18px!important}
+/* The active step should connect the graph, state structure and explanation, not just the code line. */
+.focus-stack .visual-card,.focus-queue .visual-card{outline:2px solid #176b68!important;outline-offset:2px!important}
+.focus-stack .explanation,.focus-queue .explanation{border-left:4px solid #176b68!important}
+.focus-order .visual-card,.focus-order .order-card{outline:2px solid #b88722!important;outline-offset:2px!important}
+.focus-graph .explanation{border-left:4px solid #d65336!important}
+.focus-algorithm .visual-card{outline:2px solid #9a6b45!important;outline-offset:2px!important}
+.bcc-canvas{height:clamp(390px,49vh,590px)!important;min-height:390px!important}
+.cx-layout{grid-template-columns:minmax(0,1.25fr) minmax(350px,.9fr)!important;gap:10px!important}
+.cx-graph{height:clamp(360px,47vh,560px)!important}
+.challenge-tip{line-height:1.55!important}
+@media(max-width:1050px){.layout{grid-template-columns:1fr!important}.visual-card>#canvas{height:440px!important}.right{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:650px){.right{grid-template-columns:1fr!important}.right>.card{grid-column:1!important}.visual-card>#canvas{height:390px!important;min-height:360px!important}}
+
+/* v44: BCC results are a single horizontal strip below the graph workspace. */
+.bcc-state-row{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important;margin-top:12px!important;align-items:stretch!important}
+.bcc-state-row>.state-card{min-width:0!important;min-height:118px!important;padding:13px 14px!important;overflow-wrap:anywhere!important}
+.bcc-state-row .state-title{margin-bottom:8px!important}
+.bcc-state-row .edge-stack,.bcc-state-row .bcc-list,.bcc-state-row .bridge-list,.bcc-state-row .articulation-list{display:flex!important;flex-wrap:wrap!important;gap:6px!important}
+.bcc-state-row .bridge-split{margin-top:7px!important}
+.bcc-side>.algorithm-card{grid-column:1/-1!important}
+/* Keep the live step description in the side panel, not repeated under the page title. */
+.visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.header-actions .nav-link{display:inline-flex;align-items:center;text-decoration:none;padding:9px 12px;border:1px solid var(--work-line);background:#fffdf7;color:var(--atlas-ink);font:inherit;font-size:12px;font-weight:700}
+@media(max-width:1050px){.bcc-state-row{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:600px){.bcc-state-row{grid-template-columns:1fr!important}}

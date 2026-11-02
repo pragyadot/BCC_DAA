@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BCC Lab — BCC Explorer</title>
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="bcc.css"><link rel="stylesheet" href="atlas-pages.css">
+<link rel="stylesheet" href="workspace-redesign.css"></head>
+<body>
+<main class="bcc-page">
+  <header class="bcc-topbar">
+    <button id="back" class="secondary-btn">← Graph Builder</button>
+    <nav class="bcc-page-nav"><a class="secondary-btn nav-link" href="complexity.html">Complexity Lab</a><button id="dfsFromBcc" class="secondary-btn">↔ DFS Explorer</button><a class="secondary-btn nav-link" href="bfs.html">↔ BFS Explorer</a></nav>
+    <div class="bcc-heading"><div class="eyebrow">STEP 3 · BICONNECTED COMPONENTS</div><h1>BCC Explorer</h1></div>
+  </header>
+
+  
+
+  <nav class="app-tabs" aria-label="BCC Lab sections">
+    <button class="app-tab active" data-section="exploreSection"> Explore</button>
+    <button class="app-tab" data-section="theorySection"> Theory</button>
+    <button class="app-tab" data-section="practiceSection"> Practice Lab</button>
+  </nav>
+
+  <section id="exploreSection" class="page-section active-section">
+    <section class="controls-card">
+      <div class="controls-row"><button id="first">⏮ First</button><button id="prev">← Previous</button><button id="play">▶ Play</button><button id="next">Next →</button><button id="last">Last ⏭</button><div class="speed"><span>Faster</span><input id="speed" type="range" min="1000" max="5000" step="100" value="2500"><span>Slower</span><strong id="speedValue">2.50s/step</strong></div></div>
+      <div id="timeline" class="timeline"></div>
+    </section>
+    
+    <section class="bcc-workspace">
+      <div class="bcc-canvas-card">
+        <div class="panel-head"><span id="phase">READY</span><label class="start-picker">Start vertex <select id="bccStartVertex" aria-label="Choose BCC DFS starting vertex"></select></label><span id="stepLabel">Step 0</span></div>
+        <div id="bccCanvas" class="bcc-canvas"><div id="graphLesson" class="graph-lesson" aria-live="polite"></div></div>
+        <div class="legend"><span><i class="legend-dot current-dot"></i> Current vertex</span><span><i class="legend-dot visited-dot"></i> Visited</span><span><i class="legend-dot articulation-dot"></i> Articulation point</span><span><i class="legend-line bridge-line"></i> Bridge</span><span><i class="legend-line component-line"></i> Extracted BCC</span></div>
+      </div>
+      <aside class="bcc-side">
+        <div class="explanation-card"><div class="card-kicker">CURRENT STEP</div><h2 id="title">Ready to begin</h2><p id="description">Select Next to begin the walkthrough.</p><div id="formulaBox" class="formula-box"></div><div class="cause-effect"><div class="ce-label">REASONING</div><div id="causeEffect">Identify the state change and its reason.</div></div></div>
+        <div class="state-card algorithm-card"><div class="state-title">ALGORITHM · LIVE LINE</div><div id="liveAlgorithm" class="live-algorithm" aria-live="polite"></div></div>
+      </aside>
+    </section>
+    <section class="bcc-state-row" aria-label="Live BCC results">
+      <div class="state-card"><div class="state-title">Edge Stack</div><div id="edgeStackPointer" class="edge-stack-pointer">TOP</div><div id="edgeStack" class="edge-stack">Empty</div></div>
+      <div class="state-card"><div class="state-title">BCCs Discovered</div><div id="bccList" class="bcc-list"><span class="muted">None yet</span></div></div>
+      <div class="state-card bridge-card"><div class="state-title">Bridges <span id="bridgeCount" class="state-count bridge-count">0 found</span></div><div id="bridgeList" class="bridge-list"><span class="muted">None identified yet</span></div><div id="bridgeSplit" class="bridge-split"><span class="muted">As bridges are found, see how the graph separates.</span></div></div>
+      <div class="state-card articulation-card"><div class="state-title">Articulation Points <span id="articulationCount" class="state-count">0 found</span></div><div id="articulationList" class="articulation-list"><span class="muted">None identified yet</span></div></div>
+    </section>
+  </section>
+
+  <section id="theorySection" class="page-section">
+    <div class="theory-hero"><span class="section-kicker">THEORY · INTRODUCTION</span><h2>Learn why BCC detection works</h2><p>Start with the graph and follow the reasoning. You will build the discovery times, trace back edges, calculate low values, and then use those values to identify articulation points, bridges and components.</p></div>
+    <section class="guided-bcc-lesson" aria-labelledby="guidedLessonTitle">
+      <div class="guided-lesson-heading"><div><span class="section-kicker">GUIDED LESSON · 7 STEPS</span><h2 id="guidedLessonTitle">Follow the evidence before learning the conditions</h2><p>Use Next idea to follow one DFS run. The graph, discovery times, low values and explanation refer to the same example.</p></div><div class="guided-step-count" id="guidedStepCount">Step 1 of 7</div></div>
+      <div class="guided-lesson-layout">
+        <div class="guided-graph-panel">
+          <div class="guided-graph-caption"><b>One graph throughout</b><span>DFS starts at A · visit order A → B → C → D → E</span></div>
+          <svg id="guidedGraph" viewBox="0 0 600 330" role="img" aria-label="Two triangles ABC and CDE sharing vertex C">
+            <g class="guided-edges"><line id="edgeAB" x1="105" y1="165" x2="220" y2="75"/><line id="edgeBC" x1="220" y1="75" x2="220" y2="255"/><line id="edgeCA" x1="220" y1="255" x2="105" y2="165"/><line id="edgeCD" x1="220" y1="255" x2="390" y2="75"/><line id="edgeDE" x1="390" y1="75" x2="505" y2="165"/><line id="edgeEC" x1="505" y1="165" x2="220" y2="255"/></g>
+            <g class="guided-nodes"><g id="nodeA"><circle cx="105" cy="165" r="31"/><text x="105" y="171">A</text></g><g id="nodeB"><circle cx="220" cy="75" r="31"/><text x="220" y="81">B</text></g><g id="nodeC"><circle cx="220" cy="255" r="31"/><text x="220" y="261">C</text></g><g id="nodeD"><circle cx="390" cy="75" r="31"/><text x="390" y="81">D</text></g><g id="nodeE"><circle cx="505" cy="165" r="31"/><text x="505" y="171">E</text></g></g>
+            <g class="guided-values" id="guidedValues"><text x="105" y="211" id="valueA">disc — · low —</text><text x="220" y="121" id="valueB">disc — · low —</text><text x="220" y="301" id="valueC">disc — · low —</text><text x="390" y="121" id="valueD">disc — · low —</text><text x="505" y="211" id="valueE">disc — · low —</text></g>
+          </svg>
+          <div class="guided-legend"><span><i class="g-legend tree"></i> DFS tree edge</span><span><i class="g-legend back"></i> Back edge</span><span><i class="g-legend active"></i> Current focus</span></div>
+        </div>
+        <div class="guided-explanation-panel" aria-live="polite"><div class="guided-concept-label" id="guidedConcept">01 · DISCOVERY TIME</div><h3 id="guidedTitle">When does DFS first reach a vertex?</h3><p id="guidedBody">The first time DFS visits a vertex, it gives it the next number. This is its discovery time, disc[u]. It is a timestamp—not a distance.</p><div class="guided-formula" id="guidedFormula">disc[u] = ++time</div><div class="guided-why"><b>Why this matters</b><p id="guidedWhy">The timestamps let us compare how far back toward the DFS root a subtree can reach.</p></div><div class="guided-controls"><button id="guidedPrev" disabled>← Back</button><button id="guidedNext">Next idea →</button></div></div>
+      </div>
+      <div class="guided-condition-lab"><div><span class="section-kicker">CHECK YOUR UNDERSTANDING</span><h3>What does the comparison tell us?</h3><p>In these formulas, <b>u means the parent vertex</b> and <b>v means one of u’s DFS-tree children</b>. The value low[v] belongs to the child’s whole DFS subtree; disc[u] is the time DFS first visited its parent. Assume u is not the DFS root for this comparison.</p></div><div class="condition-buttons"><button class="condition-choice active" data-case="equal">low[v] = disc[u]</button><button class="condition-choice" data-case="below">low[v] &lt; disc[u]</button><button class="condition-choice" data-case="above">low[v] &gt; disc[u]</button></div><div class="condition-result" id="conditionResult" aria-live="polite"><b>Equal: the important boundary case.</b><p>The subtree can reach u itself, but has no route to an ancestor above u. So u can still be an articulation point. The edge (u,v) is not a bridge because that return route exists.</p><div class="condition-rules"><span>Articulation point: <strong>YES (u)</strong></span><span>Bridge: <strong>NO (u–v)</strong></span></div></div></div>
+    </section>
+    <div class="theory-grid">
+      <article class="theory-card wide"><span>BEFORE THE FORMULAS</span><h3>What do the letters mean?</h3><p>We use <b>u</b> and <b>v</b> as placeholders so one rule can describe every parent–child pair in a DFS tree. They are not special vertices in the example.</p><div class="notation-grid"><div><b>u — parent</b><p>The vertex DFS was at before it discovered v.</p></div><div><b>v — child</b><p>A vertex first reached by exploring an unvisited neighbour of u.</p></div><div><b>disc[x]</b><p>The first-visit number assigned to vertex x.</p></div><div><b>low[x]</b><p>The smallest discovery number reachable from x’s DFS subtree using tree edges down and at most one back edge to an ancestor.</p></div></div><p><b>One more term:</b> an ancestor is a vertex earlier on the current DFS path. A descendant is a vertex reached further down that path.</p></article>
+      <article class="theory-card"><span>01 · FOUNDATION</span><h3>Graph and DFS</h3><p>A graph has <b>vertices</b> (the points) and <b>edges</b> (the connections). Depth-First Search (DFS) starts at one vertex, follows an unvisited neighbour as far as possible, and backtracks when it has no unvisited neighbour left.</p></article>
+      <article class="theory-card"><span>02 · THE NUMBER</span><h3>Discovery time: disc[x]</h3><p>When DFS first reaches vertex x, it assigns the next clock number. A smaller number means that vertex was discovered earlier. It does not measure distance or path length.</p><div class="formula-big">disc[x] = ++time</div></article>
+      <article class="theory-card"><span>03 · THE ALTERNATE ROUTE</span><h3>Back edge</h3><p>In an undirected DFS, a back edge connects a vertex to an ancestor that is already on the DFS path. It is not the tree edge to the parent. It gives the subtree another route upward.</p></article>
+      <article class="theory-card"><span>04 · THE SUMMARY</span><h3>Low value: low[x]</h3><p>Start with disc[x]. Then include discovery times reached by back edges from x or its DFS descendants. The smallest such time is low[x]. When a child finishes, its low value can be passed to its parent.</p><div class="formula-big">low[u] = min(disc[u], low of its children, reachable ancestors)</div></article>
+      <article class="theory-card wide"><span>05 · WHY A BCC?</span><h3>Biconnected component</h3><p>A biconnected component (BCC) is a maximal group of edges that belongs together without an articulation vertex inside the group: within the component, no single vertex is the only connection holding the rest together. Two BCCs may share an articulation vertex, as the two triangles in our example share C.</p><p>A vertex can therefore belong to more than one BCC. The components are groups of <b>edges</b>; they are not necessarily disjoint sets of vertices.</p></article>
+      <article class="theory-card wide theory-running-example">
+        <span>WORKED EXAMPLE · SAME GRAPH AS THE LESSON</span><h3>Trace the values by hand</h3>
+        <p>Edges are AB, BC, CA, CD, DE and EC. Start DFS at A and visit A → B → C → D → E. The DFS tree edges are AB, BC, CD and DE. The back edges are CA and EC.</p>
+        <div class="example-steps">
+          <div class="example-step"><b>1 · Discovery times</b><p><code>disc[A]=1, disc[B]=2, disc[C]=3, disc[D]=4, disc[E]=5</code></p><small>Assign each number the first time DFS reaches that vertex.</small></div>
+          <div class="example-step"><b>2 · Start with each vertex’s own time</b><p><code>low[A]=1, low[B]=2, low[C]=3, low[D]=4, low[E]=5</code></p><small>Before considering back edges or child results, low[x] equals disc[x].</small></div>
+          <div class="example-step"><b>3 · Use the back edges</b><p><code>C–A: low[C] can become 1<br>E–C: low[E] can become 3</code></p><small>C can reach A (time 1); E can reach C (time 3).</small></div>
+          <div class="example-step"><b>4 · Return from children</b><p><code>low[D]=min(4,3)=3<br>low[C]=min(3,3,1)=1<br>low[B]=min(2,1)=1<br>low[A]=1</code></p><small>Each parent keeps the smallest value reported by its child, as well as any back-edge reach from itself.</small></div>
+          <div class="example-step"><b>5 · Test the child D of C</b><p><code>low[D] ≥ disc[C]<br>3 ≥ 3  →  C is an articulation point</code></p><small>D’s subtree returns to C but cannot reach above C. Removing C separates the two triangles.</small></div>
+          <div class="example-step"><b>6 · Extract the two BCCs</b><p><code>{CD, DE, EC} and {AB, BC, CA}</code></p><small>When the boundary is found, pop the edge stack through the tree edge C–D. The edges popped together form one component.</small></div>
+        </div>
+      </article>
+      <article class="theory-card wide"><span>ALGORITHM · READ THE VARIABLES FIRST</span><h3>Tarjan’s DFS-based BCC procedure</h3><p>Here, <b>u</b> is the current vertex and <b>v</b> is one of its neighbours. If v is unvisited, it becomes a DFS child. If v is already visited and is not u’s parent, the edge is a back edge to an ancestor.</p><pre>DFS(u):
+  disc[u] = low[u] = ++time
+
+  for each neighbour v of u:
+    if v is unvisited:
+      parent[v] = u
+      push edge (u, v)
+      DFS(v)
+      low[u] = min(low[u], low[v])
+
+      if low[v] >= disc[u]:
+        if u is not the DFS root:
+          mark u as an articulation point
+        pop edges through (u, v)  // one BCC
+
+    else if v is not parent[u] and disc[v] < disc[u]:
+      low[u] = min(low[u], disc[v])
+      push edge (u, v)             // back edge
+
+The DFS root is an articulation point only if it has
+more than one DFS-tree child.</pre><p class="beginner-note"><b>Remember:</b> <code>low[v] ≥ disc[u]</code> marks a BCC boundary. For a non-root u, it also makes u an articulation point. A bridge uses the stricter test <code>low[v] &gt; disc[u]</code>.</p></article>
+    </div>
+  </section>
+
+  <section id="practiceSection" class="page-section">
+    <section class="practice-lab card">
+      <div class="practice-head"><div><div class="card-kicker">TRY YOURSELF · PRACTICE LAB</div><h2>Now you do it</h2><p>Each level adds one task. Start with the worked example, then try the traversal, then calculate discovery/low values, and finally identify articulation points and BCCs. The two hint buttons change the kind of help—not the difficulty.</p></div><div class="practice-display" role="group" aria-label="Practice explanation mode"><button id="practiceLearning" class="active">Conceptual hints</button><button id="practiceAlgorithm">Algorithm hints</button></div></div>
+      <div class="practice-modes"><button class="practice-mode active" data-practice-mode="easy"><b>1. Worked example</b><span>See the complete solution with reasoning. No input is graded.</span></button><button class="practice-mode" data-practice-mode="learner"><b>2. DFS order</b><span>Enter the order in which DFS first visits the vertices, starting from your selected vertex.</span></button><button class="practice-mode" data-practice-mode="intermediate"><b>3. Discovery + low values</b><span>Enter DFS order, disc[] and low[] for all six vertices.</span></button><button class="practice-mode" data-practice-mode="strict"><b>4. Full challenge</b><span>Also identify articulation points and edge-based BCCs.</span></button></div>
+      <div id="practicePanel" class="practice-panel"></div>
+    </section>
+  </section>
+</main>
+<script src="guided-lesson.js"></script>
+<script src="bcc.js"></script>
+</body>
+</html>
